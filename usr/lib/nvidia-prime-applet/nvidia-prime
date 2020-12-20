@@ -30,8 +30,7 @@ AMD_PCI_ID = "1002"
 
 
 def get_output(commands):
-    process = subprocess.Popen(
-        commands, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    process = subprocess.Popen(commands, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     out, err = process.communicate()
     return out.decode('utf-8').strip()
 
@@ -47,8 +46,7 @@ class Tray:
         # Find GPU name
         renderer = None
         try:
-            renderer = subprocess.check_output(
-                "glxinfo | grep -i 'OpenGL renderer'", shell=True).decode("UTF-8").strip().split(": ")[1]
+            renderer = subprocess.check_output("glxinfo | grep -i 'OpenGL renderer'", shell=True).decode("UTF-8").strip().split(": ")[1]
         except:
             pass
 
@@ -66,7 +64,6 @@ class Tray:
         if hybrid_supported:
             ondemand = Gtk.MenuItem(label=_("Switch to: %s") % ON_DEMAND_MODE)
             ondemand.connect("activate", self.switch, 'hybrid', ON_DEMAND_MODE)
-            ondemand.connect("activate", self.switch, 'hybrid', ON_DEMAND_MODE)
 
         integrated = Gtk.MenuItem(label=_("Switch to: %s") % integrated_mode)
         integrated.connect("activate", self.switch, 'integrated', integrated_mode)
@@ -74,9 +71,6 @@ class Tray:
         if hybrid_supported:
             compute = Gtk.MenuItem(label=_("Switch to: %s") % COMPUTE_MODE)
             compute.connect("activate", self.switch, 'compute', COMPUTE_MODE)
-
-        compute = Gtk.MenuItem(label=_("Switch to: %s") % COMPUTE_MODE)
-        compute.connect("activate", self.switch, 'compute', COMPUTE_MODE)
 
         active_gpu = get_output(["system76-power", "graphics"])
         if (active_gpu == "nvidia"):
