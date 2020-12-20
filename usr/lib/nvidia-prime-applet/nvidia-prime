@@ -17,7 +17,6 @@ gettext.install("nvidia-prime-applet", "/usr/share/locale")
 
 NVIDIA_MODE = _("NVIDIA (Performance Mode)")
 ON_DEMAND_MODE = _("Hybrid")
-INTEGRATED_MODE = _("Integrated (Power Saving Mode)")
 INTEL_MODE = _("Intel (Power Saving Mode)")
 AMD_MODE = _("AMD (Power Saving Mode)")
 COMPUTE_MODE = _("Compute")
@@ -28,6 +27,7 @@ MIN_ON_DEMAND_VERSION = "435.17"
 INTEL_PCI_ID = "8086"
 NVIDIA_PCI_ID = "10de"
 AMD_PCI_ID = "1002"
+
 
 def get_output(commands):
     process = subprocess.Popen(
@@ -66,6 +66,7 @@ class Tray:
         if hybrid_supported:
             ondemand = Gtk.MenuItem(label=_("Switch to: %s") % ON_DEMAND_MODE)
             ondemand.connect("activate", self.switch, 'hybrid', ON_DEMAND_MODE)
+            ondemand.connect("activate", self.switch, 'hybrid', ON_DEMAND_MODE)
 
         integrated = Gtk.MenuItem(label=_("Switch to: %s") % integrated_mode)
         integrated.connect("activate", self.switch, 'integrated', integrated_mode)
@@ -73,6 +74,9 @@ class Tray:
         if hybrid_supported:
             compute = Gtk.MenuItem(label=_("Switch to: %s") % COMPUTE_MODE)
             compute.connect("activate", self.switch, 'compute', COMPUTE_MODE)
+
+        compute = Gtk.MenuItem(label=_("Switch to: %s") % COMPUTE_MODE)
+        compute.connect("activate", self.switch, 'compute', COMPUTE_MODE)
 
         active_gpu = get_output(["system76-power", "graphics"])
         if (active_gpu == "nvidia"):
@@ -198,13 +202,12 @@ class Tray:
         about = Gtk.AboutDialog()
         about.set_program_name("NVIDIA Optimus System76-power")
         about.set_website("https://github.com/lilongueti/nvidia-prime-applet-system76power")
-        about.set_website_label(
-            "https://github.com/lilongueti/nvidia-prime-applet-system76power")
+        about.set_website_label("https://github.com/lilongueti/nvidia-prime-applet-system76power")
         about.set_license_type(Gtk.License.GPL_3_0)
         about.set_logo_icon_name('prime-tray-nvidia')
-
         about.run()
         about.destroy()
+
 
     def terminate(self, window=None, data=None):
         Gtk.main_quit()
