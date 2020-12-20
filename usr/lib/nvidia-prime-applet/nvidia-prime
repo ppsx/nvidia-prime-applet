@@ -164,7 +164,7 @@ class Tray:
         response = dialog.run()
         dialog.destroy()
         if response == Gtk.ResponseType.YES:
-            
+            # To do show a message while it switches
             subprocess.call(["pkexec", "system76-power", "graphics", mode])
             
             dialog.destroy()
