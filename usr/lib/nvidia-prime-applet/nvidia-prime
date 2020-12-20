@@ -48,21 +48,22 @@ class Tray:
             ondemand.connect("activate", self.switch, 'on-demand', ON_DEMAND_MODE)
 
         intel = Gtk.MenuItem(label=_("Switch to: %s") % INTEL_MODE)
-        intel.connect("activate", self.switch, 'intel', INTEL_MODE)
+        intel.connect("activate", self.switch, 'integrated', INTEL_MODE)
 
-        active_gpu = get_output(["prime-select", "query"])
+        active_gpu = get_output(["system76-power", "graphics"])
         if (active_gpu == "nvidia"):
             self.icon.set_icon_name("prime-tray-nvidia-symbolic")
             mode = NVIDIA_MODE
-        elif (active_gpu == "on-demand"):
+        # To do: Verify output on Hybrid and integrated
+        elif (active_gpu == "hybrid"):
             self.icon.set_icon_name("prime-tray-intel-symbolic")
             mode = ON_DEMAND_MODE
-        elif (active_gpu == "intel"):
+        elif (active_gpu == "integrated"):
             self.icon.set_icon_name("prime-tray-intel-symbolic")
             mode = INTEL_MODE
         else:
             self.icon.set_icon_name("dialog-error-symbolic")
-            mode = _("Unknown mode")
+            mode = ("Unknown mode")
 
         menu = Gtk.Menu()
 
@@ -143,7 +144,7 @@ class Tray:
         response = dialog.run()
         dialog.destroy()
         if response == Gtk.ResponseType.YES:
-            subprocess.call(["pkexec", "prime-select", mode])
+            subprocess.call(["pkexec", "system76-power","graphics", mode])
 
     def about(self, widget):
         about = Gtk.AboutDialog()
@@ -162,12 +163,12 @@ class Tray:
 if __name__ == "__main__":
 
     # If nvidia-prime isn't installed or isn't supported, exit cleanly
-    if not (os.path.exists("/usr/bin/nvidia-settings") and os.path.exists("/usr/bin/prime-select")):
+    if not (os.path.exists("/usr/bin/system76-power") and os.path.exists("/usr/bin/system76-power")):
         print("Aborting: Check that the nvidia-settings and nvidia-prime packages are installed.")
         sys.exit(0)
 
-    output = get_output(["prime-supported"])
-    if output != "yes":
+    output = get_output(["system76-power"])
+    if output != "":
         print("Aborting: prime not supported - is this a prime laptop and do you have nvidia drivers installed?")
         sys.exit(0)
 

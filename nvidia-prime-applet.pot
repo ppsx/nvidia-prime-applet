@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-07 15:13+0100\n"
+"POT-Creation-Date: 2020-12-20 01:44-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,51 +17,51 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:15
+#: usr/lib/nvidia-prime-applet/nvidia-prime:16
 msgid "NVIDIA (Performance Mode)"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:16
+#: usr/lib/nvidia-prime-applet/nvidia-prime:17
 msgid "NVIDIA On-Demand"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:17
+#: usr/lib/nvidia-prime-applet/nvidia-prime:18
 msgid "Intel (Power Saving Mode)"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:38
-#: usr/lib/nvidia-prime-applet/nvidia-prime:40
-#: usr/lib/nvidia-prime-applet/nvidia-prime:42
+#: usr/lib/nvidia-prime-applet/nvidia-prime:43
+#: usr/lib/nvidia-prime-applet/nvidia-prime:47
+#: usr/lib/nvidia-prime-applet/nvidia-prime:50
 #, python-format
 msgid "Switch to: %s"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:56
+#: usr/lib/nvidia-prime-applet/nvidia-prime:65
 msgid "Unknown mode"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:69
+#: usr/lib/nvidia-prime-applet/nvidia-prime:78
 #, python-format
 msgid "Active profile: %s"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:82
+#: usr/lib/nvidia-prime-applet/nvidia-prime:91
 msgid "NVIDIA Settings"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:87
+#: usr/lib/nvidia-prime-applet/nvidia-prime:96
 msgid "About"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:91
+#: usr/lib/nvidia-prime-applet/nvidia-prime:100
 msgid "Quit"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:107
+#: usr/lib/nvidia-prime-applet/nvidia-prime:135
 #, python-format
 msgid "Are you sure you want to switch to %s?"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:108
+#: usr/lib/nvidia-prime-applet/nvidia-prime:136
 msgid "Changes will take effect after you log out and log back in."
 msgstr ""
