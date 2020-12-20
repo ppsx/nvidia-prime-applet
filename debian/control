@@ -1,7 +1,7 @@
 Source: nvidia-prime-applet
 Section: admin
 Priority: optional
-Maintainer: Clement Lefebvre <root@linuxmint.com>
+Maintainer: Elias Jachniuk lilongueti@github.com
 Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.5
 

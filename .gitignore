@@ -1,0 +1,6 @@
+debian/.debhelper
+debian/files
+debian/nvidia-prime-applet.debhelper.log
+debian/nvidia-prime-applet.substvars
+debian/nvidia-prime-applet
+usr/share/locale
