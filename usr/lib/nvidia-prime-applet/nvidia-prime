@@ -236,7 +236,11 @@ if __name__ == "__main__":
                     print("Detected AMD GPU:", line)
     else:
         print("%s not found!" % path)
-        sys.exit(0)
+
+    #output = get_output(["system76-power"])
+    #if output != "":
+    #    print("Aborting: prime not supported - is this a prime laptop and do you have nvidia drivers installed?")
+    #    sys.exit(0)
 
     if not has_nvidia:
         print("No NVIDIA card detected!")
