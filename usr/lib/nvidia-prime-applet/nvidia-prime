@@ -1,9 +1,11 @@
 #!/usr/bin/python3
+from gi.repository import Gtk, XApp
 import gettext
 import gi
 import os
 import subprocess
 import sys
+
 from packaging import version
 
 gi.require_version('Gtk', '3.0')
@@ -14,15 +16,20 @@ from gi.repository import Gtk, XApp
 gettext.install("nvidia-prime-applet", "/usr/share/locale")
 
 NVIDIA_MODE = _("NVIDIA (Performance Mode)")
-ON_DEMAND_MODE = _("NVIDIA On-Demand")
-INTEL_MODE = _("Intel (Power Saving Mode)")
+ON_DEMAND_MODE = _("Hybrid")
+INTEL_MODE = _("Integrated (Power Saving Mode)")
+COMPUTE_MODE = _("Compute")
 
+# To do min Compute Version
 MIN_ON_DEMAND_VERSION = "435.17"
 
+
 def get_output(commands):
-    process = subprocess.Popen(commands, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    process = subprocess.Popen(
+        commands, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     out, err = process.communicate()
     return out.decode('utf-8').strip()
+
 
 class Tray:
     def __init__(self):
@@ -35,7 +42,8 @@ class Tray:
         # Find GPU name
         renderer = None
         try:
-            renderer = subprocess.check_output("glxinfo | grep -i 'OpenGL renderer'", shell=True).decode("UTF-8").strip().split(": ")[1]
+            renderer = subprocess.check_output(
+                "glxinfo | grep -i 'OpenGL renderer'", shell=True).decode("UTF-8").strip().split(": ")[1]
         except:
             pass
 
@@ -45,10 +53,14 @@ class Tray:
 
         if hybrid_supported:
             ondemand = Gtk.MenuItem(label=_("Switch to: %s") % ON_DEMAND_MODE)
-            ondemand.connect("activate", self.switch, 'on-demand', ON_DEMAND_MODE)
+            ondemand.connect("activate", self.switch,
+                             'hybrid', ON_DEMAND_MODE)
 
         intel = Gtk.MenuItem(label=_("Switch to: %s") % INTEL_MODE)
         intel.connect("activate", self.switch, 'integrated', INTEL_MODE)
+
+        compute = Gtk.MenuItem(label=_("Switch to: %s") % COMPUTE_MODE)
+        compute.connect("activate", self.switch, 'compute', COMPUTE_MODE)
 
         active_gpu = get_output(["system76-power", "graphics"])
         if (active_gpu == "nvidia"):
@@ -61,6 +73,9 @@ class Tray:
         elif (active_gpu == "integrated"):
             self.icon.set_icon_name("prime-tray-intel-symbolic")
             mode = INTEL_MODE
+        elif (active_gpu == "compute"):
+            self.icon.set_icon_name("prime-tray-intel-symbolic")
+            mode = COMPUTE_MODE
         else:
             self.icon.set_icon_name("dialog-error-symbolic")
             mode = ("Unknown mode")
@@ -79,13 +94,15 @@ class Tray:
         item = Gtk.MenuItem(label=_("Active profile: %s") % mode)
         item.set_sensitive(False)
         menu.append(item)
-        
+
         if mode != INTEL_MODE:
             menu.append(intel)
         if mode != NVIDIA_MODE:
             menu.append(nvidia)
         if mode != ON_DEMAND_MODE and hybrid_supported:
             menu.append(ondemand)
+        if mode != COMPUTE_MODE:
+            menu.append(compute)
 
         menu.append(Gtk.SeparatorMenuItem())
 
@@ -93,7 +110,7 @@ class Tray:
         item.connect("activate", self.run_nvidia_settings)
         menu.append(item)
         menu.append(Gtk.SeparatorMenuItem())
-        
+
         item = Gtk.MenuItem(label=_("About"))
         item.connect("activate", self.about)
         menu.append(item)
@@ -106,8 +123,9 @@ class Tray:
         self.icon.set_primary_menu(menu)
         self.icon.set_secondary_menu(menu)
 
-    def run_nvidia_settings (self, arg=None):
-        subprocess.Popen(["nvidia-settings", "-page", "PRIME Profiles"])
+    def run_nvidia_settings(self, arg=None):
+        # , "-page", "PRIME Profiles"]) Nvidia settings prime profiles seems unavailable under PopOS
+        subprocess.Popen(["nvidia-settings"])
 
     def should_show_hybrid(self):
         # > dkms status
@@ -118,8 +136,10 @@ class Tray:
                     min_version = version.parse(MIN_ON_DEMAND_VERSION)
 
                     current_version = version.parse(line.split(",")[1].strip())
-                    print("Required nvidia driver version for on-demand: %s" % str(min_version))
-                    print("Detected nvidia driver version: %s" % str(current_version))
+                    print("Required nvidia driver version for on-demand: %s" %
+                          str(min_version))
+                    print("Detected nvidia driver version: %s" %
+                          str(current_version))
                     if current_version < min_version:
                         print("On-demand not available")
                         return False
@@ -133,8 +153,8 @@ class Tray:
         return Gtk.ResponseType.NO
 
     def switch(self, widget, mode, mode_description):
-        dialog = Gtk.MessageDialog(parent=None, message_type=Gtk.MessageType.INFO, buttons=Gtk.ButtonsType.YES_NO, text=_("Are you sure you want to switch to %s?") % mode_description)
-        dialog.format_secondary_text(_('Changes will take effect after you log out and log back in.'))
+        dialog = Gtk.MessageDialog(parent=None, message_type=Gtk.MessageType.INFO, buttons=Gtk.ButtonsType.YES_NO, text=_(
+            "Are you sure you want to switch to %s? Changes will take effect after you reboot your system.") % mode_description)
         dialog.set_deletable(False)
         dialog.set_title("NVIDIA Optimus")
         dialog.set_icon_name("prime-tray-nvidia")
@@ -144,25 +164,44 @@ class Tray:
         response = dialog.run()
         dialog.destroy()
         if response == Gtk.ResponseType.YES:
-            subprocess.call(["pkexec", "system76-power","graphics", mode])
+            
+            subprocess.call(["pkexec", "system76-power", "graphics", mode])
+            
+            dialog.destroy()
+            dialog = Gtk.MessageDialog(parent=None, message_type=Gtk.MessageType.INFO, buttons=Gtk.ButtonsType.YES_NO, text=_("Reboot system now?"))
+            dialog.set_deletable(False)
+            dialog.set_title("NVIDIA Optimus")
+            dialog.set_icon_name("prime-tray-nvidia")
+            dialog.set_skip_taskbar_hint(False)
+            dialog.set_skip_pager_hint(False)
+            dialog.connect("delete_event", self.dialog_closed)
+            response = dialog.run()
+            dialog.destroy()
+
+            if response == Gtk.ResponseType.YES:
+                # To do appropiate way to call reboot (?)
+                subprocess.call(["shutdown","-r", "now"])
+            
 
     def about(self, widget):
         about = Gtk.AboutDialog()
-        about.set_program_name("NVIDIA Optimus")
-        about.set_website("https://github.com/linuxmint/nvidia-prime-applet")
-        about.set_website_label("https://github.com/linuxmint/nvidia-prime-applet")
+        about.set_program_name("NVIDIA Optimus System76-power")
+        about.set_website("https://github.com/lilongueti/nvidia-prime-applet-system76power")
+        about.set_website_label(
+            "https://github.com/lilongueti/nvidia-prime-applet-system76power")
         about.set_license_type(Gtk.License.GPL_3_0)
         about.set_logo_icon_name('prime-tray-nvidia')
 
         about.run()
         about.destroy()
 
-    def terminate(self, window = None, data = None):
+    def terminate(self, window=None, data=None):
         Gtk.main_quit()
+
 
 if __name__ == "__main__":
 
-    # If nvidia-prime isn't installed or isn't supported, exit cleanly
+    # If system76-power isn't installed or isn't supported, exit cleanly
     if not (os.path.exists("/usr/bin/system76-power") and os.path.exists("/usr/bin/system76-power")):
         print("Aborting: Check that the nvidia-settings and nvidia-prime packages are installed.")
         sys.exit(0)
