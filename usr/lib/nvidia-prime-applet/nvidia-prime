@@ -58,15 +58,15 @@ class Tray:
 
         intel = Gtk.MenuItem(label=_("Switch to: %s") % INTEL_MODE)
         intel.connect("activate", self.switch, 'integrated', INTEL_MODE)
-
-        compute = Gtk.MenuItem(label=_("Switch to: %s") % COMPUTE_MODE)
-        compute.connect("activate", self.switch, 'compute', COMPUTE_MODE)
+        
+        if hybrid_supported:
+            compute = Gtk.MenuItem(label=_("Switch to: %s") % COMPUTE_MODE)
+            compute.connect("activate", self.switch, 'compute', COMPUTE_MODE)
 
         active_gpu = get_output(["system76-power", "graphics"])
         if (active_gpu == "nvidia"):
             self.icon.set_icon_name("prime-tray-nvidia-symbolic")
             mode = NVIDIA_MODE
-        # To do: Verify output on Hybrid and integrated
         elif (active_gpu == "hybrid"):
             self.icon.set_icon_name("prime-tray-intel-symbolic")
             mode = ON_DEMAND_MODE
@@ -101,7 +101,7 @@ class Tray:
             menu.append(nvidia)
         if mode != ON_DEMAND_MODE and hybrid_supported:
             menu.append(ondemand)
-        if mode != COMPUTE_MODE:
+        if mode != COMPUTE_MODE and hybrid_supported:
             menu.append(compute)
 
         menu.append(Gtk.SeparatorMenuItem())
