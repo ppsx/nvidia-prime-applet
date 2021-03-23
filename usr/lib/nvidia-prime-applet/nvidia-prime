@@ -17,7 +17,7 @@ gettext.install("nvidia-prime-applet", "/usr/share/locale")
 
 NVIDIA_MODE = _("NVIDIA (Performance Mode)")
 ON_DEMAND_MODE = _("Hybrid")
-INTEL_MODE = _("Integrated (Power Saving Mode)")
+INTEGRATED_MODE = _("Integrated (Power Saving Mode)")
 COMPUTE_MODE = _("Compute")
 
 # To do min Compute Version
@@ -47,17 +47,21 @@ class Tray:
         except:
             pass
 
+        if "amd" in renderer.lower():
+            integrated_icon_name = "prime-tray-amd-symbolic"
+        else:
+            integrated_icon_name = "prime-tray-intel-symbolic"
+
         # Find active mode
         nvidia = Gtk.MenuItem(label=_("Switch to: %s") % NVIDIA_MODE)
         nvidia.connect("activate", self.switch, 'nvidia', NVIDIA_MODE)
 
         if hybrid_supported:
             ondemand = Gtk.MenuItem(label=_("Switch to: %s") % ON_DEMAND_MODE)
-            ondemand.connect("activate", self.switch,
-                             'hybrid', ON_DEMAND_MODE)
+            ondemand.connect("activate", self.switch, 'hybrid', ON_DEMAND_MODE)
 
-        intel = Gtk.MenuItem(label=_("Switch to: %s") % INTEL_MODE)
-        intel.connect("activate", self.switch, 'integrated', INTEL_MODE)
+        integrated = Gtk.MenuItem(label=_("Switch to: %s") % INTEGRATED_MODE)
+        integrated.connect("activate", self.switch, 'integrated', INTEGRATED_MODE)
         
         if hybrid_supported:
             compute = Gtk.MenuItem(label=_("Switch to: %s") % COMPUTE_MODE)
@@ -72,7 +76,7 @@ class Tray:
             mode = ON_DEMAND_MODE
         elif (active_gpu == "integrated"):
             self.icon.set_icon_name("prime-tray-intel-symbolic")
-            mode = INTEL_MODE
+            mode = INTEGRATED_MODE
         elif (active_gpu == "compute"):
             self.icon.set_icon_name("prime-tray-intel-symbolic")
             mode = COMPUTE_MODE
@@ -94,9 +98,9 @@ class Tray:
         item = Gtk.MenuItem(label=_("Active profile: %s") % mode)
         item.set_sensitive(False)
         menu.append(item)
-
-        if mode != INTEL_MODE:
-            menu.append(intel)
+        
+        if mode != INTEGRATED_MODE:
+            menu.append(integrated)
         if mode != NVIDIA_MODE:
             menu.append(nvidia)
         if mode != ON_DEMAND_MODE and hybrid_supported:
