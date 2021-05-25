@@ -18,11 +18,16 @@ gettext.install("nvidia-prime-applet", "/usr/share/locale")
 NVIDIA_MODE = _("NVIDIA (Performance Mode)")
 ON_DEMAND_MODE = _("Hybrid")
 INTEGRATED_MODE = _("Integrated (Power Saving Mode)")
+INTEL_MODE = _("Intel (Power Saving Mode)")
+AMD_MODE = _("AMD (Power Saving Mode)")
 COMPUTE_MODE = _("Compute")
 
 # To do min Compute Version
 MIN_ON_DEMAND_VERSION = "435.17"
 
+INTEL_PCI_ID = "8086"
+NVIDIA_PCI_ID = "10de"
+AMD_PCI_ID = "1002"
 
 def get_output(commands):
     process = subprocess.Popen(
@@ -32,7 +37,7 @@ def get_output(commands):
 
 
 class Tray:
-    def __init__(self):
+    def __init__(self, integrated_is_intel):
 
         self.icon = XApp.StatusIcon()
         self.icon.set_name("nvidia-prime")
@@ -47,10 +52,12 @@ class Tray:
         except:
             pass
 
-        if "amd" in renderer.lower():
-            integrated_icon_name = "prime-tray-amd-symbolic"
-        else:
+        if integrated_is_intel:
             integrated_icon_name = "prime-tray-intel-symbolic"
+            integrated_mode = INTEL_MODE
+        else:
+            integrated_icon_name = "prime-tray-amd-symbolic"
+            integrated_mode = AMD_MODE
 
         # Find active mode
         nvidia = Gtk.MenuItem(label=_("Switch to: %s") % NVIDIA_MODE)
@@ -60,9 +67,9 @@ class Tray:
             ondemand = Gtk.MenuItem(label=_("Switch to: %s") % ON_DEMAND_MODE)
             ondemand.connect("activate", self.switch, 'hybrid', ON_DEMAND_MODE)
 
-        integrated = Gtk.MenuItem(label=_("Switch to: %s") % INTEGRATED_MODE)
-        integrated.connect("activate", self.switch, 'integrated', INTEGRATED_MODE)
-        
+        integrated = Gtk.MenuItem(label=_("Switch to: %s") % integrated_mode)
+        integrated.connect("activate", self.switch, 'integrated', integrated_mode)
+
         if hybrid_supported:
             compute = Gtk.MenuItem(label=_("Switch to: %s") % COMPUTE_MODE)
             compute.connect("activate", self.switch, 'compute', COMPUTE_MODE)
@@ -75,10 +82,10 @@ class Tray:
             self.icon.set_icon_name("prime-tray-intel-symbolic")
             mode = ON_DEMAND_MODE
         elif (active_gpu == "integrated"):
-            self.icon.set_icon_name("prime-tray-intel-symbolic")
-            mode = INTEGRATED_MODE
+            self.icon.set_icon_name(integrated_icon_name)
+            mode = integrated_mode
         elif (active_gpu == "compute"):
-            self.icon.set_icon_name("prime-tray-intel-symbolic")
+            self.icon.set_icon_name(integrated_icon_name)
             mode = COMPUTE_MODE
         else:
             self.icon.set_icon_name("dialog-error-symbolic")
@@ -98,8 +105,8 @@ class Tray:
         item = Gtk.MenuItem(label=_("Active profile: %s") % mode)
         item.set_sensitive(False)
         menu.append(item)
-        
-        if mode != INTEGRATED_MODE:
+
+        if mode != integrated_mode:
             menu.append(integrated)
         if mode != NVIDIA_MODE:
             menu.append(nvidia)
@@ -206,14 +213,38 @@ class Tray:
 if __name__ == "__main__":
 
     # If system76-power isn't installed or isn't supported, exit cleanly
-    if not (os.path.exists("/usr/bin/system76-power") and os.path.exists("/usr/bin/system76-power")):
-        print("Aborting: Check that the nvidia-settings and nvidia-prime packages are installed.")
+    if not os.path.exists("/usr/bin/system76-power"):
+        print("Aborting: Check that system76-power package is installed.")
         sys.exit(0)
 
-    output = get_output(["system76-power"])
-    if output != "":
-        print("Aborting: prime not supported - is this a prime laptop and do you have nvidia drivers installed?")
+    has_intel = False
+    has_nvidia = False
+    has_amd = False
+    path = '/var/lib/ubuntu-drivers-common/last_gfx_boot'
+    if os.path.isfile(path):
+        with open(path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith("%s:" % INTEL_PCI_ID):
+                    has_intel = True
+                    print("Detected Intel GPU:", line)
+                elif line.startswith("%s:" % NVIDIA_PCI_ID):
+                    has_nvidia = True
+                    print("Detected NVIDIA GPU:", line)
+                elif line.startswith("%s:" % AMD_PCI_ID):
+                    has_amd = True
+                    print("Detected AMD GPU:", line)
+    else:
+        print("%s not found!" % path)
         sys.exit(0)
 
-    Tray()
-    Gtk.main()
+    if not has_nvidia:
+        print("No NVIDIA card detected!")
+        sys.exit(0)
+
+    if has_intel or has_amd:
+        Tray(integrated_is_intel=has_intel)
+        Gtk.main()
+    else:
+        print("No Intel/AMD card detected!")
+        sys.exit(0)
