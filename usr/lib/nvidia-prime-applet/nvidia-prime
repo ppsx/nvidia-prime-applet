@@ -1,15 +1,15 @@
 #!/usr/bin/python3
-from gi.repository import Gtk, XApp
-import gettext
 import gi
+gi.require_version('Gtk', '3.0')
+gi.require_version('XApp', '1.0')
+
+import gettext
 import os
 import subprocess
 import sys
 
 from packaging import version
 
-gi.require_version('Gtk', '3.0')
-gi.require_version('XApp', '1.0')
 from gi.repository import Gtk, XApp
 
 # i18n
@@ -145,10 +145,8 @@ class Tray:
                     min_version = version.parse(MIN_ON_DEMAND_VERSION)
 
                     current_version = version.parse(line.split(",")[1].strip())
-                    print("Required nvidia driver version for on-demand: %s" %
-                          str(min_version))
-                    print("Detected nvidia driver version: %s" %
-                          str(current_version))
+                    print("Required nvidia driver version for on-demand: %s" % str(min_version))
+                    print("Detected nvidia driver version: %s" % str(current_version))
                     if current_version < min_version:
                         print("On-demand not available")
                         return False
@@ -162,8 +160,7 @@ class Tray:
         return Gtk.ResponseType.NO
 
     def switch(self, widget, mode, mode_description):
-        dialog = Gtk.MessageDialog(parent=None, message_type=Gtk.MessageType.INFO, buttons=Gtk.ButtonsType.YES_NO, text=_(
-            "Are you sure you want to switch to %s? Changes will take effect after you reboot your system.") % mode_description)
+        dialog = Gtk.MessageDialog(parent=None, message_type=Gtk.MessageType.INFO, buttons=Gtk.ButtonsType.YES_NO, text=_("Are you sure you want to switch to %s? Changes will take effect after you reboot your system.") % mode_description)
         dialog.set_deletable(False)
         dialog.set_title("NVIDIA Optimus")
         dialog.set_icon_name("prime-tray-nvidia")
@@ -175,7 +172,7 @@ class Tray:
         if response == Gtk.ResponseType.YES:
             # To do show a message while it switches
             subprocess.call(["pkexec", "system76-power", "graphics", mode])
-            
+
             dialog.destroy()
             dialog = Gtk.MessageDialog(parent=None, message_type=Gtk.MessageType.INFO, buttons=Gtk.ButtonsType.YES_NO, text=_("Reboot system now?"))
             dialog.set_deletable(False)
@@ -190,7 +187,7 @@ class Tray:
             if response == Gtk.ResponseType.YES:
                 # To do appropiate way to call reboot (?)
                 subprocess.call(["shutdown","-r", "now"])
-            
+
 
     def about(self, widget):
         about = Gtk.AboutDialog()
