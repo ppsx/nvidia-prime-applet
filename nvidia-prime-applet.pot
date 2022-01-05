@@ -6,66 +6,134 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-25 13:42+0100\n"
+"POT-Creation-Date: 2022-01-05 19:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: po\n"
+"X-Poedit-SearchPath-0: aa.po\n"
+"X-Poedit-SearchPath-1: af.po\n"
+"X-Poedit-SearchPath-2: am.po\n"
+"X-Poedit-SearchPath-3: ar.po\n"
+"X-Poedit-SearchPath-4: be.po\n"
+"X-Poedit-SearchPath-5: bn.po\n"
+"X-Poedit-SearchPath-6: ca.po\n"
+"X-Poedit-SearchPath-7: ca@valencia.po\n"
+"X-Poedit-SearchPath-8: cs.po\n"
+"X-Poedit-SearchPath-9: cy.po\n"
+"X-Poedit-SearchPath-10: da.po\n"
+"X-Poedit-SearchPath-11: de.po\n"
+"X-Poedit-SearchPath-12: el.po\n"
+"X-Poedit-SearchPath-13: en_GB.po\n"
+"X-Poedit-SearchPath-14: eo.po\n"
+"X-Poedit-SearchPath-15: es.po\n"
+"X-Poedit-SearchPath-16: et.po\n"
+"X-Poedit-SearchPath-17: eu.po\n"
+"X-Poedit-SearchPath-18: fi.po\n"
+"X-Poedit-SearchPath-19: fr.po\n"
+"X-Poedit-SearchPath-20: fr_CA.po\n"
+"X-Poedit-SearchPath-21: he.po\n"
+"X-Poedit-SearchPath-22: hi.po\n"
+"X-Poedit-SearchPath-23: hr.po\n"
+"X-Poedit-SearchPath-24: hu.po\n"
+"X-Poedit-SearchPath-25: ia.po\n"
+"X-Poedit-SearchPath-26: id.po\n"
+"X-Poedit-SearchPath-27: ie.po\n"
+"X-Poedit-SearchPath-28: is.po\n"
+"X-Poedit-SearchPath-29: it.po\n"
+"X-Poedit-SearchPath-30: ja.po\n"
+"X-Poedit-SearchPath-31: ka.po\n"
+"X-Poedit-SearchPath-32: kab.po\n"
+"X-Poedit-SearchPath-33: kk.po\n"
+"X-Poedit-SearchPath-34: kn.po\n"
+"X-Poedit-SearchPath-35: ko.po\n"
+"X-Poedit-SearchPath-36: la.po\n"
+"X-Poedit-SearchPath-37: lt.po\n"
+"X-Poedit-SearchPath-38: lv.po\n"
+"X-Poedit-SearchPath-39: nl.po\n"
+"X-Poedit-SearchPath-40: oc.po\n"
+"X-Poedit-SearchPath-41: pl.po\n"
+"X-Poedit-SearchPath-42: pt.po\n"
+"X-Poedit-SearchPath-43: pt_BR.po\n"
+"X-Poedit-SearchPath-44: ro.po\n"
+"X-Poedit-SearchPath-45: ru.po\n"
+"X-Poedit-SearchPath-46: sk.po\n"
+"X-Poedit-SearchPath-47: sl.po\n"
+"X-Poedit-SearchPath-48: sr.po\n"
+"X-Poedit-SearchPath-49: sr@latin.po\n"
+"X-Poedit-SearchPath-50: sv.po\n"
+"X-Poedit-SearchPath-51: tr.po\n"
+"X-Poedit-SearchPath-52: uk.po\n"
+"X-Poedit-SearchPath-53: uz.po\n"
+"X-Poedit-SearchPath-54: vi.po\n"
+"X-Poedit-SearchPath-55: zgh.po\n"
+"X-Poedit-SearchPath-56: zh_CN.po\n"
+"X-Poedit-SearchPath-57: zh_HK.po\n"
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:16
+#: usr/lib/nvidia-prime-applet/nvidia-prime:19
 msgid "NVIDIA (Performance Mode)"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:17
-msgid "NVIDIA On-Demand"
+#: usr/lib/nvidia-prime-applet/nvidia-prime:20
+msgid "Hybrid"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:18
+#: usr/lib/nvidia-prime-applet/nvidia-prime:21
 msgid "Intel (Power Saving Mode)"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:19
+#: usr/lib/nvidia-prime-applet/nvidia-prime:22
 msgid "AMD (Power Saving Mode)"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:55
-#: usr/lib/nvidia-prime-applet/nvidia-prime:59
-#: usr/lib/nvidia-prime-applet/nvidia-prime:62
+#: usr/lib/nvidia-prime-applet/nvidia-prime:23
+msgid "Compute"
+msgstr ""
+
+#: usr/lib/nvidia-prime-applet/nvidia-prime:61
+#: usr/lib/nvidia-prime-applet/nvidia-prime:64
+#: usr/lib/nvidia-prime-applet/nvidia-prime:68
+#: usr/lib/nvidia-prime-applet/nvidia-prime:71
 #, python-format
 msgid "Switch to: %s"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:77
+#: usr/lib/nvidia-prime-applet/nvidia-prime:89
 msgid "Unknown mode"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:90
+#: usr/lib/nvidia-prime-applet/nvidia-prime:102
 #, python-format
 msgid "Active profile: %s"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:103
+#: usr/lib/nvidia-prime-applet/nvidia-prime:117
 msgid "NVIDIA Settings"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:108
+#: usr/lib/nvidia-prime-applet/nvidia-prime:122
 msgid "About"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:112
+#: usr/lib/nvidia-prime-applet/nvidia-prime:126
 msgid "Quit"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:147
+#: usr/lib/nvidia-prime-applet/nvidia-prime:162
 #, python-format
 msgid "Are you sure you want to switch to %s?"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:148
-msgid "Changes will take effect after you log out and log back in."
+#: usr/lib/nvidia-prime-applet/nvidia-prime:163
+msgid "Changes will take effect after you reboot your system."
+msgstr ""
+
+#: usr/lib/nvidia-prime-applet/nvidia-prime:178
+msgid "Reboot system now?"
 msgstr ""
