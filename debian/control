@@ -1,8 +1,8 @@
 Source: nvidia-prime-applet
 Section: admin
 Priority: optional
-Maintainer: Elias Jachniuk lilongueti@github.com
-Build-Depends: debhelper (>= 9)
+Maintainer: P. Patrick Socha ppsx@github.com
+Build-Depends: debhelper (>= 10)
 Standards-Version: 3.9.5
 
 Package: nvidia-prime-applet
