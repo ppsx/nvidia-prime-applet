@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-05 19:00+0100\n"
-"PO-Revision-Date: 2022-01-05 19:44+0100\n"
+"POT-Creation-Date: 2022-01-06 15:18+0100\n"
+"PO-Revision-Date: 2022-01-06 15:35+0100\n"
 "Last-Translator: Saša Marjanović <Unknown>\n"
 "Language-Team: Serbian Latin <sr@latin@li.org>\n"
 "Language: sr@latin\n"
@@ -38,45 +38,62 @@ msgstr "AMD (režim uštede energije)"
 msgid "Compute"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:61
-#: usr/lib/nvidia-prime-applet/nvidia-prime:64
-#: usr/lib/nvidia-prime-applet/nvidia-prime:68
-#: usr/lib/nvidia-prime-applet/nvidia-prime:71
+#: usr/lib/nvidia-prime-applet/nvidia-prime:84
+msgid "Unknown mode"
+msgstr "Nepoznati režim rada"
+
+#: usr/lib/nvidia-prime-applet/nvidia-prime:89
+#: usr/lib/nvidia-prime-applet/nvidia-prime:95
+#: usr/lib/nvidia-prime-applet/nvidia-prime:102
+#: usr/lib/nvidia-prime-applet/nvidia-prime:108
+#, python-format
+msgid "Switch back to: %s"
+msgstr ""
+
+#: usr/lib/nvidia-prime-applet/nvidia-prime:91
+#: usr/lib/nvidia-prime-applet/nvidia-prime:97
+#: usr/lib/nvidia-prime-applet/nvidia-prime:104
+#: usr/lib/nvidia-prime-applet/nvidia-prime:110
 #, python-format
 msgid "Switch to: %s"
 msgstr "Prebaci se na: %s"
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:89
-msgid "Unknown mode"
-msgstr "Nepoznati režim rada"
-
-#: usr/lib/nvidia-prime-applet/nvidia-prime:102
+#: usr/lib/nvidia-prime-applet/nvidia-prime:126
 #, python-format
 msgid "Active profile: %s"
 msgstr "Aktivni profil: %s"
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:117
+#: usr/lib/nvidia-prime-applet/nvidia-prime:129
+#, python-format
+msgid "Will switch to: %s"
+msgstr ""
+
+#: usr/lib/nvidia-prime-applet/nvidia-prime:145
 msgid "NVIDIA Settings"
 msgstr "NVIDIA podešavanja"
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:122
+#: usr/lib/nvidia-prime-applet/nvidia-prime:150
 msgid "About"
 msgstr "O programu"
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:126
+#: usr/lib/nvidia-prime-applet/nvidia-prime:154
 msgid "Quit"
 msgstr "Izađi"
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:162
+#: usr/lib/nvidia-prime-applet/nvidia-prime:190
 #, python-format
 msgid "Are you sure you want to switch to %s?"
 msgstr "Da li ste sigurni da želite da se prebacite na  %s?"
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:163
+#: usr/lib/nvidia-prime-applet/nvidia-prime:191
+msgid "It can take a while, be patient.\n"
+msgstr ""
+
+#: usr/lib/nvidia-prime-applet/nvidia-prime:191
 msgid "Changes will take effect after you reboot your system."
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:178
+#: usr/lib/nvidia-prime-applet/nvidia-prime:214
 msgid "Reboot system now?"
 msgstr ""
 
