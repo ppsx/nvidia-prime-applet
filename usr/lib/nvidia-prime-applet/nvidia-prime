@@ -116,7 +116,7 @@ class Tray:
             if mode != ON_DEMAND_MODE and hybrid_supported:
                 menu.append(ondemand)
         else:
-            confirm_item = Gtk.MenuItem(label=_("Log out to switch to: %s") % self.switched_to)
+            confirm_item = Gtk.MenuItem(label=_("Reboot to switch to: %s") % self.switched_to)
             confirm_item.set_sensitive(False)
             menu.append(confirm_item)
             cancel_item = Gtk.MenuItem(label=_("Cancel Switch"))
@@ -176,7 +176,7 @@ class Tray:
         else:
             message = _("Are you sure you want to switch to %s?") % mode_description
         dialog = Gtk.MessageDialog(parent=None, message_type=Gtk.MessageType.INFO, buttons=Gtk.ButtonsType.YES_NO, text=message)
-        dialog.format_secondary_text(_('It can take a while, be patient.\n')+_('Changes will take effect after you reboot your system.'))        if not is_cancel:
+        dialog.format_secondary_text(_('It can take a while, be patient.\n') + _('Changes will take effect after you reboot your system.'))
         dialog.set_deletable(False)
         dialog.set_title("NVIDIA Optimus")
         dialog.set_icon_name("prime-tray-nvidia")

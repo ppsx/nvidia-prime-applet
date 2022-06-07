@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-06 15:18+0100\n"
-"PO-Revision-Date: 2022-01-06 15:35+0100\n"
+"POT-Creation-Date: 2022-06-07 20:51+0200\n"
+"PO-Revision-Date: 2022-06-07 21:51+0200\n"
 "Last-Translator: Hakim Oubouali <Unknown>\n"
 "Language-Team: Standard Moroccan Tamazight <zgh@li.org>\n"
 "Language: zgh\n"
@@ -16,14 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2021-12-31 12:26+0000\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: usr/lib/nvidia-prime-applet/nvidia-prime:19
 msgid "NVIDIA (Performance Mode)"
 msgstr ""
 
 #: usr/lib/nvidia-prime-applet/nvidia-prime:20
-msgid "Hybrid"
+msgid "NVIDIA Hybrid (On-Demand)"
 msgstr ""
 
 #: usr/lib/nvidia-prime-applet/nvidia-prime:21
@@ -34,65 +34,61 @@ msgstr ""
 msgid "AMD (Power Saving Mode)"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:23
-msgid "Compute"
-msgstr ""
-
-#: usr/lib/nvidia-prime-applet/nvidia-prime:84
-msgid "Unknown mode"
-msgstr ""
-
-#: usr/lib/nvidia-prime-applet/nvidia-prime:89
-#: usr/lib/nvidia-prime-applet/nvidia-prime:95
-#: usr/lib/nvidia-prime-applet/nvidia-prime:102
-#: usr/lib/nvidia-prime-applet/nvidia-prime:108
-#, python-format
-msgid "Switch back to: %s"
-msgstr ""
-
-#: usr/lib/nvidia-prime-applet/nvidia-prime:91
-#: usr/lib/nvidia-prime-applet/nvidia-prime:97
-#: usr/lib/nvidia-prime-applet/nvidia-prime:104
-#: usr/lib/nvidia-prime-applet/nvidia-prime:110
+#: usr/lib/nvidia-prime-applet/nvidia-prime:66
+#: usr/lib/nvidia-prime-applet/nvidia-prime:70
+#: usr/lib/nvidia-prime-applet/nvidia-prime:73
 #, python-format
 msgid "Switch to: %s"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:126
+#: usr/lib/nvidia-prime-applet/nvidia-prime:92
+msgid "Unknown mode"
+msgstr ""
+
+#: usr/lib/nvidia-prime-applet/nvidia-prime:107
 #, python-format
 msgid "Active profile: %s"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:129
+#: usr/lib/nvidia-prime-applet/nvidia-prime:119
 #, python-format
-msgid "Will switch to: %s"
+msgid "Reboot to switch to: %s"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:145
+#: usr/lib/nvidia-prime-applet/nvidia-prime:122
+msgid "Cancel Switch"
+msgstr ""
+
+#: usr/lib/nvidia-prime-applet/nvidia-prime:129
 msgid "NVIDIA Settings"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:150
+#: usr/lib/nvidia-prime-applet/nvidia-prime:134
 msgid "About"
 msgstr "ⵖⴼ"
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:154
+#: usr/lib/nvidia-prime-applet/nvidia-prime:138
 msgid "Quit"
 msgstr "ⴼⴼⵖ"
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:190
+#: usr/lib/nvidia-prime-applet/nvidia-prime:175
+#, python-format
+msgid "Are you sure you want to cancel the switch and return to %s?"
+msgstr ""
+
+#: usr/lib/nvidia-prime-applet/nvidia-prime:177
 #, python-format
 msgid "Are you sure you want to switch to %s?"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:191
+#: usr/lib/nvidia-prime-applet/nvidia-prime:179
 msgid "It can take a while, be patient.\n"
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:191
+#: usr/lib/nvidia-prime-applet/nvidia-prime:179
 msgid "Changes will take effect after you reboot your system."
 msgstr ""
 
-#: usr/lib/nvidia-prime-applet/nvidia-prime:214
+#: usr/lib/nvidia-prime-applet/nvidia-prime:198
 msgid "Reboot system now?"
 msgstr ""
