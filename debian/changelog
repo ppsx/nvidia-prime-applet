@@ -1,3 +1,9 @@
+nvidia-prime-applet (2.0.2) una; urgency=medium
+
+  * Make it working with kernel 6.2.0 and nvidia 525.x
+
+ -- P. Patrick Socha <ppsx@github.com>  Tue, 07 Mar 2023 11:04:00 +0000
+
 nvidia-prime-applet (2.0.1) una; urgency=medium
 
   * Merged linuxmint/nvidia-prime-applet latest changes

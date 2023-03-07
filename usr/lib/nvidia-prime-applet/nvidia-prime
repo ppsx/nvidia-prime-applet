@@ -84,7 +84,7 @@ class Tray:
         elif (active_gpu == "hybrid"):
             self.icon.set_icon_name(integrated_icon_name)
             mode = ON_DEMAND_MODE
-        elif (active_gpu == "intel"):
+        elif (active_gpu == "intel" or active_gpu == "integrated"):
             self.icon.set_icon_name(integrated_icon_name)
             mode = self.integrated_mode
         else:
@@ -148,20 +148,20 @@ class Tray:
         # , "-page", "PRIME Profiles"]) Nvidia settings prime profiles seems unavailable under PopOS
 
     def should_show_hybrid(self):
-        # > dkms status
-        # nvidia, 440.100, 5.4.0-40-generic, x86_64: installed
+        # > dkms status nvidia
+        # old way: nvidia, 440.100, 5.4.0-40-generic, x86_64: installed
+        # new way: nvidia/525.85.05, 6.2.0-76060200-generic, x86_64: installed
         try:
-            for line in get_output(["dkms", "status"]).splitlines():
-                if "nvidia" in line:
-                    min_version = version.parse(MIN_ON_DEMAND_VERSION)
+            for line in get_output(["dkms", "status", "nvidia"]).splitlines():
+                min_version = version.parse(MIN_ON_DEMAND_VERSION)
 
-                    current_version = version.parse(line.split(",")[1].strip())
-                    print("Minimum nvidia driver version for on-demand: %s" % str(min_version))
-                    print("Detected nvidia driver version: %s" % str(current_version))
-                    if current_version < min_version:
-                        print("On-demand not available")
-                        return False
-                    break
+                current_version = version.parse(line.split(",")[0].strip().split("/")[1])
+                print("Minimum nvidia driver version for on-demand: %s" % str(min_version))
+                print("Detected nvidia driver version: %s" % str(current_version))
+                if current_version < min_version:
+                    print("On-demand not available")
+                    return False
+                break
         except:
             pass
 
